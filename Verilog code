@@ -1,0 +1,15 @@
+module proto(w,shift_amt,shift_case,y);
+input [0:3]w;
+input [0:1]shift_amt;
+input [0:1]shift_case;
+output reg [0:3]y;
+always@(*) begin 
+case(shift_case)
+2'b00: y<=w << shift_amt | w >> (4-shift_amt);//ROL
+2'b01: y <= w>>shift_amt | w << (4-shift_amt);//ROR
+2'b10: y <= w >> shift_amt;//right shift
+2'b11: y <= w << shift_amt;//left shift
+default: y <= w;
+endcase 
+end 
+endmodule 
